@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FXZY ERA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Teko:wght@500;600;700&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 12px;
+  }
+
+  .poster {
+    position:relative;
+    width:1000px;
+    max-width:100%;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(150,180,255,0.08), transparent 45%),
+      radial-gradient(ellipse at 85% 85%, rgba(150,180,255,0.06), transparent 50%),
+      #030304;
+    border:1px solid #1c1e24;
+    border-radius:6px;
+    overflow:hidden;
+    padding:56px 54px 46px;
+  }
+
+  /* starfield */
+  .stars {
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, #ffffff55 50%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, #ffffff40 50%, transparent 100%),
+      radial-gradient(1px 1px at 55% 20%, #ffffff55 50%, transparent 100%),
+      radial-gradient(1px 1px at 70% 75%, #ffffff35 50%, transparent 100%),
+      radial-gradient(1px 1px at 90% 40%, #ffffff50 50%, transparent 100%),
+      radial-gradient(1px 1px at 15% 85%, #ffffff45 50%, transparent 100%),
+      radial-gradient(1px 1px at 45% 90%, #ffffff35 50%, transparent 100%),
+      radial-gradient(1px 1px at 95% 10%, #ffffff40 50%, transparent 100%);
+    background-repeat:no-repeat;
+    pointer-events:none;
+    opacity:.8;
+  }
+
+  .bolts { position:absolute; inset:0; pointer-events:none; }
+  .bolts svg { position:absolute; }
+  .bolt-l { top:-10px; left:-30px; width:260px; }
+  .bolt-r { top:-4px; right:-40px; width:280px; }
+  .bolt-path {
+    fill:none;
+    stroke:#dfe9ff;
+    stroke-width:2.5;
+    stroke-linejoin:round;
+    stroke-linecap:round;
+    filter: drop-shadow(0 0 6px #a9c4ff) drop-shadow(0 0 14px #6f97ff);
+    animation: flicker 3.2s infinite;
+  }
+  @keyframes flicker {
+    0%,100% { opacity:1; }
+    4% { opacity:.25; }
+    6% { opacity:1; }
+    46% { opacity:1; }
+    48% { opacity:.15; }
+    50% { opacity:.9; }
+    51% { opacity:.3; }
+    53% { opacity:1; }
+  }
+
+  .content { position:relative; z-index:2; }
+
+  .title-wrap { text-align:center; margin-bottom:8px; }
+  .title {
+    font-family:'Anton', sans-serif;
+    font-size:96px;
+    letter-spacing:4px;
+    line-height:1;
+    background: linear-gradient(180deg, #ffffff 0%, #c9d6ea 28%, #8592ab 46%, #ffffff 52%, #6b7690 70%, #dfe6f2 88%, #ffffff 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    transform: skewX(-3deg);
+    filter: drop-shadow(0 0 18px rgba(160,190,255,0.35)) drop-shadow(0 2px 0 #000);
+    text-shadow: 0 0 40px rgba(140,170,255,0.15);
+    position:relative;
+  }
+  .title::after {
+    content:'FXZY ERA';
+    position:absolute; left:0; top:0; width:100%;
+    background: linear-gradient(180deg, transparent 40%, rgba(180,210,255,0.9) 50%, transparent 60%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation: shimmer 5s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%,100% { opacity:0; transform:translateX(-40px); }
+    45% { opacity:0; }
+    50% { opacity:.9; transform:translateX(40px); }
+    55% { opacity:0; }
+  }
+
+  .divider {
+    height:1px;
+    margin:26px 0 30px;
+    background: linear-gradient(90deg, transparent, #8fa6d6 20%, #eaf1ff 50%, #8fa6d6 80%, transparent);
+    box-shadow: 0 0 12px rgba(140,170,255,0.5);
+  }
+
+  .row {
+    display:flex;
+    align-items:stretch;
+    height:60px;
+    margin-bottom:9px;
+    position:relative;
+  }
+
+  .rank {
+    width:76px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Teko', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    color:#0b0c10;
+    background: linear-gradient(135deg,#f4f7fb 0%, #b9c3d6 35%, #7c869c 55%, #eef2f9 75%, #9aa5bc 100%);
+    clip-path: polygon(0 0, 100% 0, 82% 100%, 0% 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+  }
+
+  .name-bar {
+    flex:1;
+    margin-left:-14px;
+    padding-left:32px;
+    display:flex;
+    align-items:center;
+    background: linear-gradient(90deg, #101216 0%, #06070a 60%, #030304 100%);
+    border:1px solid #23262e;
+    border-left:none;
+    position:relative;
+    overflow:hidden;
+  }
+  .name-bar::before {
+    content:'';
+    position:absolute; left:0; top:0; bottom:0; width:1px;
+    background:linear-gradient(180deg, transparent, #9ab0e0, transparent);
+  }
+  .name-bar::after {
+    content:'';
+    position:absolute; right:0; top:0; bottom:0; width:60%;
+    background: linear-gradient(90deg, transparent, rgba(140,170,255,0.05));
+  }
+
+  .name {
+    font-family:'Teko', sans-serif;
+    font-weight:600;
+    font-size:30px;
+    letter-spacing:0.5px;
+    color:#e7ebf3;
+    text-shadow: 0 0 10px rgba(140,170,255,0.15);
+  }
+
+  /* top rank special treatment */
+  .row.top .rank {
+    background: linear-gradient(135deg,#fff6d8 0%, #f0cf6a 30%, #b8892a 55%, #ffe9a8 75%, #caa14a 100%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 0 22px rgba(255,205,90,0.55);
+  }
+  .row.top .name-bar {
+    background: linear-gradient(90deg, #171106 0%, #0c0904 60%, #030304 100%);
+    border-color:#5a4a20;
+    box-shadow: 0 0 26px rgba(255,196,70,0.18), inset 0 0 24px rgba(255,196,70,0.05);
+  }
+  .row.top .name-bar::before {
+    background:linear-gradient(180deg, transparent, #ffd876, transparent);
+  }
+  .row.top .name {
+    color:#ffe9b0;
+    text-shadow: 0 0 16px rgba(255,205,90,0.55), 0 0 4px rgba(255,255,255,0.4);
+    font-size:33px;
+  }
+  .crown {
+    margin-left:14px;
+    display:flex;
+    align-items:center;
+  }
+
+  .row.extra { margin-top:16px; }
+  .row.extra .rank {
+    font-family:'Anton', sans-serif;
+    font-size:15px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background: linear-gradient(135deg,#dfe6f2 0%, #8b95ac 50%, #dfe6f2 100%);
+  }
+  .row.extra .name-bar {
+    border-style:dashed;
+    border-color:#3a3e48;
+  }
+  .row.extra .name {
+    font-family:'Anton', sans-serif;
+    font-size:24px;
+    letter-spacing:1px;
+    color:#c7cfe0;
+    text-transform:lowercase;
+  }
+
+  .footer {
+    text-align:center;
+    margin-top:22px;
+    font-family:'Teko', sans-serif;
+    font-size:15px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#4a5065;
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <div class="stars"></div>
+
+  <div class="bolts">
+    <svg class="bolt-l" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
+      <path class="bolt-path" d="M150 0 L70 130 L120 140 L20 300" />
+      <path class="bolt-path" style="animation-delay:.4s" d="M100 40 L40 150 L80 160 L10 260" />
+    </svg>
+    <svg class="bolt-r" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
+      <path class="bolt-path" d="M50 0 L130 130 L80 140 L180 300" />
+      <path class="bolt-path" style="animation-delay:.6s" d="M100 40 L160 150 L120 160 L190 260" />
+    </svg>
+  </div>
+
+  <div class="content">
+    <div class="title-wrap">
+      <div class="title">FXZY ERA</div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="row top">
+      <div class="rank">1</div>
+      <div class="name-bar">
+        <div class="name">goofy goober</div>
+        <div class="crown">
+          <svg width="26" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 16 L2 6 L7 11 L12 3 L17 11 L22 6 L22 16 Z" fill="#ffe9a8" stroke="#b8892a" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="row"><div class="rank">2</div><div class="name-bar"><div class="name">koby</div></div></div>
+    <div class="row"><div class="rank">3</div><div class="name-bar"><div class="name">flegg</div></div></div>
+    <div class="row"><div class="rank">4</div><div class="name-bar"><div class="name">isaacfett11</div></div></div>
+    <div class="row"><div class="rank">5</div><div class="name-bar"><div class="name">foxypants12</div></div></div>
+    <div class="row"><div class="rank">6</div><div class="name-bar"><div class="name">kev</div></div></div>
+    <div class="row"><div class="rank">7</div><div class="name-bar"><div class="name">rvlph</div></div></div>
+    <div class="row"><div class="rank">8</div><div class="name-bar"><div class="name">dami</div></div></div>
+    <div class="row"><div class="rank">9</div><div class="name-bar"><div class="name">marcus</div></div></div>
+    <div class="row"><div class="rank">10</div><div class="name-bar"><div class="name">mcr George</div></div></div>
+
+    <div class="row extra">
+      <div class="rank">extra</div>
+      <div class="name-bar"><div class="name">the milkmanuo</div></div>
+    </div>
+
+    <div class="footer">est. fxzy era</div>
+  </div>
+</div>
+
+</body>
+</html>
