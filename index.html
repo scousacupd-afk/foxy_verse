@@ -21,200 +21,255 @@
     width:1000px;
     max-width:100%;
     background:
-      radial-gradient(ellipse at 20% 10%, rgba(150,180,255,0.08), transparent 45%),
-      radial-gradient(ellipse at 85% 85%, rgba(150,180,255,0.06), transparent 50%),
-      #030304;
-    border:1px solid #1c1e24;
-    border-radius:6px;
+      radial-gradient(ellipse 700px 400px at 15% -5%, rgba(90,140,255,0.28), transparent 60%),
+      radial-gradient(ellipse 700px 400px at 100% 0%, rgba(140,90,255,0.18), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 50% 110%, rgba(90,140,255,0.16), transparent 60%),
+      linear-gradient(180deg, #050508 0%, #020203 40%, #000000 100%);
+    border-radius:8px;
     overflow:hidden;
-    padding:56px 54px 46px;
+    box-shadow: 0 0 120px rgba(90,130,255,0.2);
   }
 
-  /* starfield */
-  .stars {
+  .noise {
     position:absolute; inset:0;
     background-image:
-      radial-gradient(1px 1px at 10% 15%, #ffffff55 50%, transparent 100%),
-      radial-gradient(1px 1px at 30% 60%, #ffffff40 50%, transparent 100%),
-      radial-gradient(1px 1px at 55% 20%, #ffffff55 50%, transparent 100%),
-      radial-gradient(1px 1px at 70% 75%, #ffffff35 50%, transparent 100%),
-      radial-gradient(1px 1px at 90% 40%, #ffffff50 50%, transparent 100%),
-      radial-gradient(1px 1px at 15% 85%, #ffffff45 50%, transparent 100%),
-      radial-gradient(1px 1px at 45% 90%, #ffffff35 50%, transparent 100%),
-      radial-gradient(1px 1px at 95% 10%, #ffffff40 50%, transparent 100%);
+      radial-gradient(1px 1px at 6% 10%, #ffffff70 50%, transparent 100%),
+      radial-gradient(1px 1px at 22% 48%, #ffffff45 50%, transparent 100%),
+      radial-gradient(1px 1px at 38% 14%, #ffffff65 50%, transparent 100%),
+      radial-gradient(1px 1px at 61% 62%, #ffffff40 50%, transparent 100%),
+      radial-gradient(1px 1px at 79% 28%, #ffffff55 50%, transparent 100%),
+      radial-gradient(1px 1px at 91% 55%, #ffffff45 50%, transparent 100%),
+      radial-gradient(1px 1px at 11% 78%, #ffffff50 50%, transparent 100%),
+      radial-gradient(1px 1px at 47% 85%, #ffffff40 50%, transparent 100%),
+      radial-gradient(1px 1px at 68% 92%, #ffffff35 50%, transparent 100%),
+      radial-gradient(1px 1px at 84% 8%, #ffffff45 50%, transparent 100%);
     background-repeat:no-repeat;
+    opacity:.9;
     pointer-events:none;
-    opacity:.8;
   }
 
-  .bolts { position:absolute; inset:0; pointer-events:none; }
-  .bolts svg { position:absolute; }
-  .bolt-l { top:-10px; left:-30px; width:260px; }
-  .bolt-r { top:-4px; right:-40px; width:280px; }
-  .bolt-path {
-    fill:none;
-    stroke:#dfe9ff;
-    stroke-width:2.5;
-    stroke-linejoin:round;
-    stroke-linecap:round;
-    filter: drop-shadow(0 0 6px #a9c4ff) drop-shadow(0 0 14px #6f97ff);
-    animation: flicker 3.2s infinite;
-  }
-  @keyframes flicker {
-    0%,100% { opacity:1; }
-    4% { opacity:.25; }
-    6% { opacity:1; }
-    46% { opacity:1; }
-    48% { opacity:.15; }
-    50% { opacity:.9; }
-    51% { opacity:.3; }
-    53% { opacity:1; }
+  .clouds {
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 500px 160px at 20% 0%, rgba(120,150,220,0.12), transparent 70%),
+      radial-gradient(ellipse 600px 200px at 75% 5%, rgba(120,150,220,0.1), transparent 70%);
   }
 
-  .content { position:relative; z-index:2; }
+  .flash {
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 25% 0%, rgba(190,210,255,0.55), transparent 55%);
+    pointer-events:none;
+    animation:bigflash 5s infinite;
+    mix-blend-mode:screen;
+  }
+  @keyframes bigflash {
+    0%,89%,100% { opacity:0; }
+    90% { opacity:1; }
+    91% { opacity:.15; }
+    92.5% { opacity:.9; }
+    94% { opacity:0; }
+  }
 
-  .title-wrap { text-align:center; margin-bottom:8px; }
+  .megabolt { position:absolute; top:0; pointer-events:none; }
+  .megabolt path {
+    fill:none; stroke:#eef3ff; stroke-width:3;
+    stroke-linejoin:round; stroke-linecap:round;
+    filter: drop-shadow(0 0 10px #9fbdff) drop-shadow(0 0 26px #6f97ff) drop-shadow(0 0 40px #4a6fe0);
+  }
+  .mb1 { left:-10px; width:220px; animation:strike1 5s infinite; }
+  .mb2 { right:-20px; width:260px; animation:strike2 5s infinite; }
+  @keyframes strike1 {
+    0%,88%,100% { opacity:0; }
+    90% { opacity:1; } 91% { opacity:.2; } 92% { opacity:1; } 94% { opacity:0; }
+  }
+  @keyframes strike2 {
+    0%,45%,100% { opacity:0; }
+    47% { opacity:1; } 48% { opacity:.15; } 49% { opacity:1; } 51% { opacity:0; }
+  }
+
+  .frame {
+    position:absolute; inset:14px;
+    border:1px solid rgba(150,180,255,0.25);
+    border-radius:6px;
+    pointer-events:none;
+    z-index:6;
+  }
+  .corner { position:absolute; width:30px; height:30px; border:2px solid #b8cdff; z-index:7; filter:drop-shadow(0 0 8px #6f97ff); }
+  .corner.tl { top:8px; left:8px; border-right:none; border-bottom:none; }
+  .corner.tr { top:8px; right:8px; border-left:none; border-bottom:none; }
+  .corner.bl { bottom:8px; left:8px; border-right:none; border-top:none; }
+  .corner.br { bottom:8px; right:8px; border-left:none; border-top:none; }
+
+  .content { position:relative; z-index:3; padding:64px 56px 0; }
+
+  .eyebrow {
+    text-align:center;
+    font-family:'Teko', sans-serif;
+    letter-spacing:10px;
+    font-size:14px;
+    color:#7d8fc9;
+    margin-bottom:6px;
+  }
+
+  .title-wrap { text-align:center; position:relative; margin-bottom:10px; }
+  .title-glow {
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:680px; height:220px;
+    background:radial-gradient(ellipse, rgba(140,170,255,0.4), transparent 70%);
+    filter:blur(14px);
+    animation:pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+
   .title {
-    font-family:'Anton', sans-serif;
-    font-size:96px;
-    letter-spacing:4px;
-    line-height:1;
-    background: linear-gradient(180deg, #ffffff 0%, #c9d6ea 28%, #8592ab 46%, #ffffff 52%, #6b7690 70%, #dfe6f2 88%, #ffffff 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    transform: skewX(-3deg);
-    filter: drop-shadow(0 0 18px rgba(160,190,255,0.35)) drop-shadow(0 2px 0 #000);
-    text-shadow: 0 0 40px rgba(140,170,255,0.15);
     position:relative;
+    font-family:'Anton', sans-serif;
+    font-size:112px;
+    letter-spacing:2px;
+    line-height:1;
+    background: linear-gradient(180deg, #ffffff 0%, #d6def2 24%, #7683a5 44%, #ffffff 50%, #5c688a 66%, #e9eefa 86%, #ffffff 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    transform: skewX(-4deg) scaleY(1.05);
+    filter: drop-shadow(0 0 30px rgba(160,190,255,0.55)) drop-shadow(0 3px 0 #000);
+  }
+  .title-ghost {
+    position:absolute; left:0; top:0; width:100%;
+    font-family:'Anton', sans-serif;
+    font-size:112px;
+    letter-spacing:2px;
+    color:#6f97ff;
+    opacity:0;
+    transform: skewX(-4deg) scaleY(1.05) translateX(-3px);
+    animation: glitch 5s infinite;
+    mix-blend-mode:screen;
+  }
+  @keyframes glitch {
+    0%,91%,100% { opacity:0; transform: skewX(-4deg) scaleY(1.05) translateX(-3px); }
+    91.5% { opacity:.7; transform: skewX(-4deg) scaleY(1.05) translateX(4px); }
+    92% { opacity:0; }
+    92.5% { opacity:.6; transform: skewX(-4deg) scaleY(1.05) translateX(-5px); }
+    93% { opacity:0; }
   }
   .title::after {
     content:'FXZY ERA';
     position:absolute; left:0; top:0; width:100%;
-    background: linear-gradient(180deg, transparent 40%, rgba(180,210,255,0.9) 50%, transparent 60%);
+    background: linear-gradient(180deg, transparent 40%, rgba(210,225,255,0.95) 50%, transparent 60%);
     -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation: shimmer 5s ease-in-out infinite;
+    animation: shimmer 4s ease-in-out infinite;
   }
   @keyframes shimmer {
-    0%,100% { opacity:0; transform:translateX(-40px); }
+    0%,100% { opacity:0; transform:translateX(-50px); }
     45% { opacity:0; }
-    50% { opacity:.9; transform:translateX(40px); }
+    50% { opacity:1; transform:translateX(50px); }
     55% { opacity:0; }
   }
 
   .divider {
-    height:1px;
-    margin:26px 0 30px;
-    background: linear-gradient(90deg, transparent, #8fa6d6 20%, #eaf1ff 50%, #8fa6d6 80%, transparent);
-    box-shadow: 0 0 12px rgba(140,170,255,0.5);
+    height:1px; margin:24px 0 32px;
+    background: linear-gradient(90deg, transparent, #9fbdff 15%, #f6f9ff 50%, #9fbdff 85%, transparent);
+    box-shadow: 0 0 18px rgba(140,170,255,0.8);
+    position:relative;
+  }
+  .divider::after {
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:8px; height:8px; background:#eef3ff; border-radius:50%;
+    box-shadow: 0 0 16px 4px rgba(160,190,255,0.9);
   }
 
   .row {
-    display:flex;
-    align-items:stretch;
-    height:60px;
-    margin-bottom:9px;
-    position:relative;
+    display:flex; align-items:stretch; height:56px; margin-bottom:10px; position:relative;
   }
 
   .rank {
-    width:76px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'Teko', sans-serif;
-    font-weight:700;
-    font-size:34px;
+    width:70px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Teko', sans-serif; font-weight:700; font-size:30px;
     color:#0b0c10;
     background: linear-gradient(135deg,#f4f7fb 0%, #b9c3d6 35%, #7c869c 55%, #eef2f9 75%, #9aa5bc 100%);
-    clip-path: polygon(0 0, 100% 0, 82% 100%, 0% 100%);
+    clip-path: polygon(14% 0, 100% 0, 86% 100%, 0% 100%);
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
   }
 
   .name-bar {
-    flex:1;
-    margin-left:-14px;
-    padding-left:32px;
-    display:flex;
-    align-items:center;
-    background: linear-gradient(90deg, #101216 0%, #06070a 60%, #030304 100%);
-    border:1px solid #23262e;
-    border-left:none;
-    position:relative;
-    overflow:hidden;
+    flex:1; margin-left:-12px; padding-left:30px;
+    display:flex; align-items:center; justify-content:space-between;
+    background: linear-gradient(90deg, #0e1015 0%, #06070a 55%, #030304 100%);
+    border:1px solid #23262e; border-left:none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%);
+    position:relative; overflow:hidden;
   }
   .name-bar::before {
-    content:'';
-    position:absolute; left:0; top:0; bottom:0; width:1px;
+    content:''; position:absolute; left:0; top:0; bottom:0; width:1px;
     background:linear-gradient(180deg, transparent, #9ab0e0, transparent);
   }
-  .name-bar::after {
-    content:'';
-    position:absolute; right:0; top:0; bottom:0; width:60%;
-    background: linear-gradient(90deg, transparent, rgba(140,170,255,0.05));
+  .spark {
+    width:60px; height:100%; opacity:.5;
   }
 
   .name {
-    font-family:'Teko', sans-serif;
-    font-weight:600;
-    font-size:30px;
-    letter-spacing:0.5px;
-    color:#e7ebf3;
-    text-shadow: 0 0 10px rgba(140,170,255,0.15);
+    font-family:'Teko', sans-serif; font-weight:600; font-size:28px; letter-spacing:0.5px;
+    color:#e7ebf3; text-shadow: 0 0 10px rgba(140,170,255,0.15);
+    padding-right:16px;
   }
 
-  /* top rank special treatment */
   .row.top .rank {
     background: linear-gradient(135deg,#fff6d8 0%, #f0cf6a 30%, #b8892a 55%, #ffe9a8 75%, #caa14a 100%);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 0 22px rgba(255,205,90,0.55);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 0 30px rgba(255,205,90,0.65);
   }
   .row.top .name-bar {
-    background: linear-gradient(90deg, #171106 0%, #0c0904 60%, #030304 100%);
+    background: linear-gradient(90deg, #171106 0%, #0c0904 55%, #030304 100%);
     border-color:#5a4a20;
-    box-shadow: 0 0 26px rgba(255,196,70,0.18), inset 0 0 24px rgba(255,196,70,0.05);
+    box-shadow: 0 0 34px rgba(255,196,70,0.25), inset 0 0 24px rgba(255,196,70,0.07);
   }
-  .row.top .name-bar::before {
-    background:linear-gradient(180deg, transparent, #ffd876, transparent);
-  }
+  .row.top .name-bar::before { background:linear-gradient(180deg, transparent, #ffd876, transparent); }
   .row.top .name {
-    color:#ffe9b0;
-    text-shadow: 0 0 16px rgba(255,205,90,0.55), 0 0 4px rgba(255,255,255,0.4);
-    font-size:33px;
+    color:#ffe9b0; text-shadow: 0 0 20px rgba(255,205,90,0.65), 0 0 4px rgba(255,255,255,0.4);
+    font-size:31px;
   }
-  .crown {
-    margin-left:14px;
-    display:flex;
-    align-items:center;
-  }
+  .crown { margin-right:14px; display:flex; align-items:center; }
 
-  .row.extra { margin-top:16px; }
+  .row.extra { margin-top:18px; }
   .row.extra .rank {
-    font-family:'Anton', sans-serif;
-    font-size:15px;
-    letter-spacing:1px;
-    text-transform:uppercase;
+    font-family:'Anton', sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase;
     background: linear-gradient(135deg,#dfe6f2 0%, #8b95ac 50%, #dfe6f2 100%);
   }
-  .row.extra .name-bar {
-    border-style:dashed;
-    border-color:#3a3e48;
-  }
+  .row.extra .name-bar { border-style:dashed; border-color:#3a3e48; }
   .row.extra .name {
-    font-family:'Anton', sans-serif;
-    font-size:24px;
-    letter-spacing:1px;
-    color:#c7cfe0;
-    text-transform:lowercase;
+    font-family:'Anton', sans-serif; font-size:22px; letter-spacing:1px; color:#c7cfe0; text-transform:lowercase;
+  }
+
+  .milk-banner {
+    position:relative;
+    margin:44px -56px 0;
+    padding:0 56px;
+    height:260px;
+    background: linear-gradient(180deg, transparent, rgba(30,45,90,0.35) 40%, rgba(10,14,26,0.6));
+    display:flex; align-items:flex-end; justify-content:center;
+    overflow:visible;
+  }
+  .milk-banner::before {
+    content:''; position:absolute; left:56px; right:56px; top:0; height:1px;
+    background:linear-gradient(90deg, transparent, #6f97ff, transparent);
+  }
+  .strike-line {
+    position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+    width:220px; opacity:0;
+    animation: strikeDown 5s infinite;
+  }
+  @keyframes strikeDown {
+    0%,44%,100% { opacity:0; }
+    46% { opacity:1; } 47% { opacity:.2; } 48% { opacity:1; } 50% { opacity:0; }
+  }
+  .puddle-glow {
+    position:absolute; bottom:6px; left:50%; transform:translateX(-50%);
+    width:260px; height:34px;
+    background:radial-gradient(ellipse, rgba(159,189,255,0.5), transparent 70%);
+    animation:pulse 2.6s ease-in-out infinite;
   }
 
   .footer {
-    text-align:center;
-    margin-top:22px;
-    font-family:'Teko', sans-serif;
-    font-size:15px;
-    letter-spacing:3px;
-    text-transform:uppercase;
+    text-align:center; padding:20px 0 34px;
+    font-family:'Teko', sans-serif; font-size:14px; letter-spacing:4px; text-transform:uppercase;
     color:#4a5065;
   }
 </style>
@@ -222,21 +277,29 @@
 <body>
 
 <div class="poster">
-  <div class="stars"></div>
+  <div class="noise"></div>
+  <div class="clouds"></div>
+  <div class="flash"></div>
+  <div class="frame"></div>
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
 
-  <div class="bolts">
-    <svg class="bolt-l" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
-      <path class="bolt-path" d="M150 0 L70 130 L120 140 L20 300" />
-      <path class="bolt-path" style="animation-delay:.4s" d="M100 40 L40 150 L80 160 L10 260" />
-    </svg>
-    <svg class="bolt-r" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
-      <path class="bolt-path" d="M50 0 L130 130 L80 140 L180 300" />
-      <path class="bolt-path" style="animation-delay:.6s" d="M100 40 L160 150 L120 160 L190 260" />
-    </svg>
-  </div>
+  <svg class="megabolt mb1" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
+    <path d="M170 0 L70 130 L120 140 L10 340" />
+    <path d="M120 20 L50 150 L90 160 L15 300" opacity="0.6"/>
+  </svg>
+  <svg class="megabolt mb2" viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40 0 L150 130 L95 140 L210 340" />
+    <path d="M90 20 L170 150 L130 160 L200 300" opacity="0.6"/>
+  </svg>
 
   <div class="content">
+    <div class="eyebrow">the leaderboard strikes</div>
     <div class="title-wrap">
+      <div class="title-glow"></div>
+      <div class="title-ghost">FXZY ERA</div>
       <div class="title">FXZY ERA</div>
     </div>
     <div class="divider"></div>
@@ -266,6 +329,71 @@
     <div class="row extra">
       <div class="rank">extra</div>
       <div class="name-bar"><div class="name">the milkmanuo</div></div>
+    </div>
+
+    <div class="milk-banner">
+      <svg class="strike-line" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 0 L30 70 L55 75 L10 200" fill="none" stroke="#eef3ff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" filter="drop-shadow(0 0 10px #9fbdff) drop-shadow(0 0 26px #6f97ff)"/>
+      </svg>
+      <div class="puddle-glow"></div>
+
+      <svg width="240" height="360" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="uniform" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2c303c"/>
+            <stop offset="100%" stop-color="#0c0d11"/>
+          </linearGradient>
+          <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3d4250"/>
+            <stop offset="100%" stop-color="#1c1e26"/>
+          </linearGradient>
+          <linearGradient id="milk" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f2f7ff"/>
+            <stop offset="100%" stop-color="#9fbdff"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="70" y="300" width="26" height="76" rx="6" fill="url(#uniform)" stroke="#9fbdff" stroke-width="1.3"/>
+        <rect x="104" y="300" width="26" height="76" rx="6" fill="url(#uniform)" stroke="#9fbdff" stroke-width="1.3"/>
+
+        <path d="M60 165 Q58 232 66 305 L134 305 Q142 232 140 165 Q100 148 60 165 Z" fill="url(#uniform)" stroke="#9fbdff" stroke-width="1.6"/>
+
+        <rect x="96" y="170" width="8" height="110" fill="#05060a"/>
+        <circle cx="100" cy="192" r="2.4" fill="#c9d6ea"/>
+        <circle cx="100" cy="216" r="2.4" fill="#c9d6ea"/>
+        <circle cx="100" cy="240" r="2.4" fill="#c9d6ea"/>
+
+        <path d="M83 171 L100 181 L83 191 Z" fill="#0b0c10" stroke="#9fbdff" stroke-width="1"/>
+        <path d="M117 171 L100 181 L117 191 Z" fill="#0b0c10" stroke="#9fbdff" stroke-width="1"/>
+        <circle cx="100" cy="181" r="4" fill="#1c1e26" stroke="#9fbdff" stroke-width="1"/>
+
+        <rect x="112" y="210" width="22" height="12" rx="2" fill="#151720" stroke="#6f97ff" stroke-width="1"/>
+
+        <path d="M138 175 Q170 186 180 228 Q184 240 173 246 Q161 250 155 236 Q147 208 130 189 Z" fill="url(#uniform)" stroke="#9fbdff" stroke-width="1.6"/>
+        <ellipse cx="177" cy="240" rx="13" ry="12" fill="url(#skin)" stroke="#9fbdff" stroke-width="1.2"/>
+
+        <path d="M62 175 Q44 206 48 258 Q50 270 60 268 Q68 266 66 254 Q62 212 76 187 Z" fill="url(#uniform)" stroke="#9fbdff" stroke-width="1.6"/>
+
+        <rect x="90" y="144" width="20" height="20" fill="url(#skin)"/>
+        <ellipse cx="100" cy="123" rx="30" ry="32" fill="url(#skin)" stroke="#9fbdff" stroke-width="1.6"/>
+
+        <path d="M84 134 Q100 144 116 134 Q108 140 100 138 Q92 140 84 134 Z" fill="#05060a"/>
+        <circle cx="90" cy="119" r="2.4" fill="#eaf2ff"/>
+        <circle cx="110" cy="119" r="2.4" fill="#eaf2ff"/>
+
+        <path d="M68 105 Q100 80 132 105 L132 114 Q100 98 68 114 Z" fill="url(#uniform)" stroke="#9fbdff" stroke-width="1.6"/>
+        <rect x="66" y="109" width="68" height="10" rx="3" fill="#05060a" stroke="#9fbdff" stroke-width="1"/>
+        <rect x="82" y="95" width="36" height="12" rx="2" fill="#151720" stroke="#6f97ff" stroke-width="1"/>
+
+        <rect x="165" y="248" width="24" height="52" rx="4" fill="url(#milk)" stroke="#eaf2ff" stroke-width="1.6"/>
+        <rect x="171" y="234" width="12" height="18" rx="2" fill="url(#milk)" stroke="#eaf2ff" stroke-width="1.6"/>
+        <rect x="169" y="228" width="16" height="8" rx="2" fill="#eaf2ff"/>
+        <rect x="165" y="272" width="24" height="14" fill="#0b0c10" opacity="0.5"/>
+
+        <circle cx="177" cy="212" r="3" fill="#eaf2ff" opacity="0.9"/>
+        <circle cx="170" cy="200" r="2" fill="#eaf2ff" opacity="0.7"/>
+        <circle cx="184" cy="196" r="2.4" fill="#eaf2ff" opacity="0.8"/>
+      </svg>
     </div>
 
     <div class="footer">est. fxzy era</div>
